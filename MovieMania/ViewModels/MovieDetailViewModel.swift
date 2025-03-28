@@ -1,3 +1,11 @@
+//
+//  MovieDetailViewModel.swift
+//  MovieMania
+//
+//  Created by Ansh Hardaha on 28/03/25.
+//
+
+
 import Foundation
 
 class MovieDetailViewModel: ObservableObject {

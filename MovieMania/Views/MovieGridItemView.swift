@@ -1,3 +1,10 @@
+//
+//  MovieGridItemView.swift
+//  MovieMania
+//
+//  Created by Ansh Hardaha on 28/03/25.
+//
+
 import SwiftUI
 
 struct MovieGridItemView: View {
@@ -17,12 +24,26 @@ struct MovieGridItemView: View {
             .frame(width: 150, height: 225)
             .clipped()
             
-            Text(movie.title ?? "No Title")
-                .font(.caption)
-                .multilineTextAlignment(.center)
+            Text(movie.title)
+                .font(.headline)
+                .foregroundColor(.white)
                 .lineLimit(1)
+                .multilineTextAlignment(.center)
         }
-        .background(Color.white)
+        .background(
+            ZStack {
+                AsyncImage(url: URL(string: movie.poster ?? "")) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .blur(radius: 20)
+                        .opacity(0.5)
+                        .ignoresSafeArea()
+                } placeholder: {
+                    Color.black.opacity(0.5)
+                }
+            }
+        )
         .cornerRadius(8)
         .shadow(radius: 4)
     }
@@ -30,7 +51,7 @@ struct MovieGridItemView: View {
 
 #Preview {
     let sampleMovie = SearchMovie(
-        title: "Inception",
+        title: "Inception of the world war 3",
         year: "2010",
         imdbID: "tt1375666",
         type: "movie",

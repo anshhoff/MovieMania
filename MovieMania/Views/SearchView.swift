@@ -1,3 +1,10 @@
+//
+//  SearchView.swift
+//  MovieMania
+//
+//  Created by Ansh Hardaha on 28/03/25.
+//
+
 import SwiftUI
 
 struct SearchView: View {
@@ -32,7 +39,7 @@ struct SearchView: View {
                         .foregroundColor(.red)
                         .padding()
                 } else {
-                    List(viewModel.movies) { movie in
+                    List(viewModel.searchResults) { movie in
                         NavigationLink(destination: MovieDetailView(movieID: movie.imdbID)) {
                             HStack {
                                 AsyncImage(url: URL(string: movie.poster ?? "")) { image in
@@ -71,3 +78,4 @@ struct SearchView: View {
 #Preview {
     SearchView()
 }
+

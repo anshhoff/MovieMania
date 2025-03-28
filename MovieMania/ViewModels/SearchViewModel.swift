@@ -1,12 +1,18 @@
+//
+//  SearchViewModel.swift
+//  MovieMania
+//
+//  Created by Ansh Hardaha on 28/03/25.
+//
+
 import Foundation
 
 class SearchViewModel: ObservableObject {
-    @Published var query: String = ""
     @Published var searchResults: [SearchMovie] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
 
-    func searchMovies() {
+    func searchMovies(query: String) {
         guard !query.isEmpty else { return }
         isLoading = true
         errorMessage = nil
@@ -24,3 +30,4 @@ class SearchViewModel: ObservableObject {
         }
     }
 }
+

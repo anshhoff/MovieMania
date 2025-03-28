@@ -1,3 +1,11 @@
+//
+//  HomeViewModel.swift
+//  MovieMania
+//
+//  Created by Ansh Hardaha on 28/03/25.
+//
+
+
 import Foundation
 import SwiftUI
 
@@ -5,7 +13,7 @@ class HomeViewModel: ObservableObject {
     @Published var movies: [SearchMovie] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
-
+    
     func fetchRandomMovies() {
         isLoading = true
         errorMessage = nil

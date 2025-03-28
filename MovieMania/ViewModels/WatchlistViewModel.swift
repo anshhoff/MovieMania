@@ -5,7 +5,6 @@
 //  Created by Ansh Hardaha on 28/03/25.
 //
 
-
 import Foundation
 
 class WatchlistViewModel: ObservableObject {
@@ -17,7 +16,7 @@ class WatchlistViewModel: ObservableObject {
         loadWatchlist()
     }
 
-    // Add to Watchlist
+    // MARK: - Add to Watchlist
     func addToWatchlist(movie: SearchMovie) {
         if !watchlist.contains(where: { $0.imdbID == movie.imdbID }) {
             watchlist.append(movie)
@@ -25,24 +24,24 @@ class WatchlistViewModel: ObservableObject {
         }
     }
 
-    // Remove from Watchlist
-    func removeFromWatchlist(movie: SearchMovie) {
-        watchlist.removeAll { $0.imdbID == movie.imdbID }
+    // MARK: - Remove from Watchlist
+    func removeFromWatchlist(at offsets: IndexSet) {
+        watchlist.remove(atOffsets: offsets)
         saveWatchlist()
     }
 
-    // Save to UserDefaults
+    // MARK: - Save to UserDefaults
     private func saveWatchlist() {
-        if let encoded = try? JSONEncoder().encode(watchlist) {
-            UserDefaults.standard.set(encoded, forKey: watchlistKey)
+        if let data = try? JSONEncoder().encode(watchlist) {
+            UserDefaults.standard.set(data, forKey: watchlistKey)
         }
     }
 
-    // Load from UserDefaults
+    // MARK: - Load from UserDefaults
     private func loadWatchlist() {
         if let data = UserDefaults.standard.data(forKey: watchlistKey),
-           let decoded = try? JSONDecoder().decode([SearchMovie].self, from: data) {
-            watchlist = decoded
+           let savedMovies = try? JSONDecoder().decode([SearchMovie].self, from: data) {
+            watchlist = savedMovies
         }
     }
 }

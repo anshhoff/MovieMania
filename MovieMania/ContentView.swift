@@ -8,17 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var watchlistVM = WatchlistViewModel()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView {
+            HomeView()
+                .tabItem {
+                    Label("Home", systemImage: "house")
+                }
+
+            SearchView()
+                .tabItem {
+                    Label("Search", systemImage: "magnifyingglass")
+                }
+
+            WatchlistView()
+                .tabItem {
+                    Label("Watchlist", systemImage: "bookmark")
+                }
         }
-        .padding()
+        .accentColor(.blue)
+        .environmentObject(watchlistVM)
     }
 }
 
 #Preview {
     ContentView()
 }
+

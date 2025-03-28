@@ -5,11 +5,9 @@
 //  Created by Ansh Hardaha on 28/03/25.
 //
 
-import Foundation
-
-// MARK: - Movie Model (For Detail API)
+// For detailed movie information
 struct Movie: Codable, Identifiable {
-    var id: String { imdbID } // for SwiftUI List
+    var id: String { imdbID }
     let title: String
     let year: String
     let rated: String?
@@ -45,7 +43,7 @@ struct Movie: Codable, Identifiable {
     }
 }
 
-// MARK: - MovieSearchResponse (For Search API)
+// For search results
 struct MovieSearchResponse: Codable {
     let search: [SearchMovie]?
     let totalResults: String?
@@ -58,7 +56,6 @@ struct MovieSearchResponse: Codable {
     }
 }
 
-// MARK: - Search Movie (For Search Results)
 struct SearchMovie: Codable, Identifiable {
     var id: String { imdbID }
     let title: String
