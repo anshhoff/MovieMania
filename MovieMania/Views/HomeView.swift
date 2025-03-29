@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject var viewModel = HomeViewModel()
+    //@StateObject var viewModel = HomeViewModel()
     @Namespace var animation
     // Define your grid columns
     let columns = [GridItem(.adaptive(minimum: 150), spacing: 16)]

@@ -4,54 +4,59 @@
 //
 //  Created by Ansh Hardaha on 28/03/25.
 //
+
 import SwiftUI
 
 struct WatchlistView: View {
-    @EnvironmentObject var viewModel: WatchlistViewModel
-
+    @EnvironmentObject var watchlistVM: WatchlistViewModel
+    
     var body: some View {
         NavigationView {
-            List {
-                if viewModel.watchlist.isEmpty {
-                    Text("Your watchlist is empty.")
+            VStack {
+                if watchlistVM.watchlist.isEmpty {
+                    Text("Your Watchlist is Empty!")
+                        .font(.title2)
                         .foregroundColor(.gray)
                         .padding()
                 } else {
-                    ForEach(viewModel.watchlist, id: \.imdbID) { movie in
-                        HStack {
-                            AsyncImage(url: URL(string: movie.poster)) { image in
-                                image
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 60, height: 90)
-                                    .cornerRadius(8)
-                            } placeholder: {
-                                Image(systemName: "photo")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 60, height: 90)
-                                    .foregroundColor(.gray)
-                            }
-
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(movie.title)
-                                    .font(.headline)
-                                Text(movie.year)
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
+                    List {
+                        ForEach(watchlistVM.watchlist, id: \.imdbID) { movie in
+                            NavigationLink(destination: MovieDetailView(movieID: movie.imdbID)) {
+                                HStack {
+                                    AsyncImage(url: URL(string: movie.poster ?? "")) { image in
+                                        image
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 50, height: 75)
+                                            .cornerRadius(8)
+                                    } placeholder: {
+                                        Rectangle()
+                                            .fill(Color.gray.opacity(0.3))
+                                            .frame(width: 50, height: 75)
+                                            .cornerRadius(8)
+                                    }
+                                    
+                                    VStack(alignment: .leading) {
+                                        Text(movie.title)
+                                            .font(.headline)
+                                        Text(movie.year)
+                                            .font(.subheadline)
+                                            .foregroundColor(.gray)
+                                    }
+                                }
+                                .padding(.vertical, 4)
                             }
                         }
+                        .onDelete(perform: watchlistVM.removeFromWatchlist)
                     }
-                    .onDelete(perform: viewModel.removeFromWatchlist)
+                    .listStyle(PlainListStyle())
                 }
             }
-            .navigationTitle("Watchlist")
-            .toolbar {
-                EditButton()
-            }
+            .navigationTitle("Your Watchlist")
         }
     }
 }
+
 
 #Preview {
     WatchlistView()
