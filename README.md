@@ -95,7 +95,7 @@ MovieMania
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/MovieMania.git
+   git clone https://github.com/anshhoff/MovieMania.git
    ```
 
 2. **Open the project in Xcode:**
